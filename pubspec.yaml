@@ -1,0 +1,41 @@
+name: durga_puja_donations
+description: "A new Flutter project."
+
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  url_launcher: ^6.1.7  # For Stripe payments, or razorpay_flutter for Razorpay
+  pdf: ^3.8.0
+  path_provider: ^2.0.11  # To access device storage
+  flutter_local_notifications: ^17.2.2  # Optional: for notifications
+  flutter_localizations:
+    sdk: flutter
+  # Add other dependencies if needed
+  fluttertoast: ^8.0.9
+
+  google_fonts: ^3.0.1
+  carousel_slider: ^4.2.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/images/
