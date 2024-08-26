@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class GalleryPage extends StatelessWidget {
   final List<String> imageUrls = [
@@ -12,24 +13,94 @@ class GalleryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gallery'),
-      ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: Text(
+          'Gallery',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 22,
+          ),
         ),
-        padding: EdgeInsets.all(8.0),
-        itemCount: imageUrls.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Image.network(
-              imageUrls[index],
-              fit: BoxFit.cover,
-            ),
-          );
-        },
+        centerTitle: true,
+      ),
+      body: Container(
+        color: Colors.black,
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+          ),
+          padding: EdgeInsets.all(8.0),
+          itemCount: imageUrls.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImagePreviewScreen(
+                      imageUrl: imageUrls[index],
+                    ),
+                  ),
+                );
+              },
+              child: Card(
+                elevation: 8.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrls[index],
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[900],
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Center(
+                      child: Icon(Icons.error, color: Colors.red),
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class ImagePreviewScreen extends StatelessWidget {
+  final String imageUrl;
+
+  ImagePreviewScreen({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: Text('Image Preview', style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: InteractiveViewer(
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
     );
   }

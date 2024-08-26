@@ -158,6 +158,89 @@ class HomePage extends StatelessWidget {
                       },
                     ),
                   ),
+                  SizedBox(height: 30),
+                  FadeInUp(
+                    delay: Duration(milliseconds: 600),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Upcoming Events',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '1. Community Service Day',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                'Join us for a day of community service and make a difference in our neighborhood.',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                '2. Cultural Dance Workshop',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                'Participate in our workshop to learn traditional dance forms and celebrate our culture.',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        FadeInUp(
+                          delay: Duration(milliseconds: 800),
+                          child: Text(
+                            'Contact Us',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        FadeInUp(
+                          delay: Duration(milliseconds: 1000),
+                          child: Container(
+                            padding: EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white24,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Email: contact@durga_puja.com',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Phone: +1 234 567 890',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Address: 123 Festival Lane, Puja City, PC 12345',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
