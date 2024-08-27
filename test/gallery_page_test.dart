@@ -2,24 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:durga_puja_donations/gallery_page.dart';
-import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/testing.dart';
 
 void main() {
   testWidgets(
       'GalleryPage renders and navigates to ImagePreviewScreen on image tap',
       (WidgetTester tester) async {
-    // Create a mock HTTP client
-    final client = MockClient((request) async {
-      return http.Response(
-        // Provide a dummy response body
-        'dummy image data',
-        200,
-        headers: {'content-type': 'image/jpeg'},
-      );
-    });
-
     // Build the GalleryPage widget
     await tester.pumpWidget(
       MaterialApp(
