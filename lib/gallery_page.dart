@@ -9,13 +9,15 @@ class GalleryPage extends StatelessWidget {
     'https://media.gettyimages.com/id/458583265/photo/goddess-during-durga-puja-celebrations.jpg?s=170667a&w=gi&k=20&c=gsFTh47LFP1486n9q4n8EXuQ3coo4NNE-c2_GSwo1EU=',
   ];
 
+  GalleryPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Gallery',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -28,12 +30,12 @@ class GalleryPage extends StatelessWidget {
       body: Container(
         color: Colors.black,
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           itemCount: imageUrls.length,
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -58,14 +60,14 @@ class GalleryPage extends StatelessWidget {
                     imageUrl: imageUrls[index],
                     placeholder: (context, url) => Container(
                       color: Colors.grey[900],
-                      child: Center(
+                      child: const Center(
                         child: CircularProgressIndicator(
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Center(
+                    errorWidget: (context, url, error) => const Center(
                       child: Icon(Icons.error, color: Colors.red),
                     ),
                     fit: BoxFit.cover,
@@ -83,7 +85,7 @@ class GalleryPage extends StatelessWidget {
 class ImagePreviewScreen extends StatelessWidget {
   final String imageUrl;
 
-  ImagePreviewScreen({required this.imageUrl});
+  const ImagePreviewScreen({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class ImagePreviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: Text('Image Preview', style: TextStyle(color: Colors.white)),
+        title: const Text('Image Preview', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: Center(

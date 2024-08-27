@@ -2,11 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
-import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:flutter/rendering.dart';
+
+import 'package:square_in_app_payments/in_app_payments.dart';
 
 class DonationPage extends StatefulWidget {
+  const DonationPage({super.key});
+
+  
   @override
   _DonationPageState createState() => _DonationPageState();
 }
@@ -15,28 +18,38 @@ class _DonationPageState extends State<DonationPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   Uint8List? imageBytes;
+  
+  
+  void _pay (){
 
+   
+   InAppPayments.startCardEntryFlow(
+    onCardNonceRequestSuccess: (CardDetails) {},
+     onCardEntryCancel: (){});
+   
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Make a Donation'),
+        title: const Text('Make a Donation'),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Enter your name'),
+                decoration: const InputDecoration(labelText: 'Enter your name'),
               ),
               TextField(
                 controller: locationController,
-                decoration: InputDecoration(labelText: 'Enter your location'),
+                decoration: const InputDecoration(labelText: 'Enter your location'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
                   String name = nameController.text;
@@ -46,32 +59,38 @@ class _DonationPageState extends State<DonationPage> {
                     if (success) {
                       setState(() {});
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Invitation image generated."),
                         ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Failed to generate image."),
                         ),
                       );
                     }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text("Please fill in your details."),
                       ),
                     );
                   }
                 },
-                child: Text('Generate Invitation'),
+                child: const Text('Generate Invitation'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+              FloatingActionButton(
+                onPressed: _pay,
+                tooltip: 'Donation',
+                child: const Icon(Icons.payment),),
+              const SizedBox(height: 20),
+              
               if (imageBytes != null)
                 Image.memory(imageBytes!)
               else
-                Text('No image generated yet.'),
+                const Text('No image generated yet.'),
             ],
           ),
         ),
@@ -82,24 +101,24 @@ class _DonationPageState extends State<DonationPage> {
   Future<bool> _generateImage(String name, String location) async {
     try {
       final recorder = ui.PictureRecorder();
-      final canvas = Canvas(recorder, Rect.fromLTWH(0, 0, 600, 800));
+      final canvas = Canvas(recorder, const Rect.fromLTWH(0, 0, 600, 800));
 
       // Create a gradient background
       final gradient = ui.Gradient.linear(
-        Offset(0, 0),
-        Offset(600, 800),
+        const Offset(0, 0),
+        const Offset(600, 800),
         [Colors.blueAccent, Colors.purpleAccent],
       );
       final paint = Paint()..shader = gradient;
-      canvas.drawRect(Rect.fromLTWH(0, 0, 600, 800), paint);
+      canvas.drawRect(const Rect.fromLTWH(0, 0, 600, 800), paint);
 
       // Draw top image
-      final imageProvider = AssetImage('assets/events.jpg');
+      const imageProvider = AssetImage('assets/events.jpg');
       final image = await _loadImage(imageProvider);
       canvas.drawImageRect(
         image,
         Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
-        Rect.fromLTWH(0, 0, 600, 200),
+        const Rect.fromLTWH(0, 0, 600, 200),
         Paint(),
       );
 
@@ -112,7 +131,7 @@ class _DonationPageState extends State<DonationPage> {
               'Your presence will make the event even more special.\n\n'
               'Location: $location\n\n'
               'Thank you for your support and we look forward to celebrating with you!',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -124,7 +143,7 @@ class _DonationPageState extends State<DonationPage> {
         textDirection: TextDirection.ltr,
       );
       textPainter.layout(maxWidth: 580);
-      textPainter.paint(canvas, Offset(10, 210));
+      textPainter.paint(canvas, const Offset(10, 210));
 
       final picture = recorder.endRecording();
       final img = await picture.toImage(600, 800);
