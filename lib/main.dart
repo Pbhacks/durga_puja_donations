@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DonationPage()),
+                              builder: (context) =>  DonationPage()),
                         );
                       },
                     ),
@@ -372,7 +372,7 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DonationPage()),
+                                builder: (context) => DonationPage()),
                           );
                         },
                       ),

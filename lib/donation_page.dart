@@ -1,15 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:ffi';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 
 import 'package:square_in_app_payments/in_app_payments.dart';
+import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 
 class DonationPage extends StatefulWidget {
-  const DonationPage({super.key});
+  DonationPage({super.key});
 
-  
   @override
   _DonationPageState createState() => _DonationPageState();
 }
@@ -18,17 +21,88 @@ class _DonationPageState extends State<DonationPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   Uint8List? imageBytes;
-  
-  
-  void _pay (){
 
-   
-   InAppPayments.startCardEntryFlow(
-    onCardNonceRequestSuccess: (CardDetails) {},
-     onCardEntryCancel: (){});
-   
+  String result = '';
+  String environmentValue = 'SANDBOX';
+  String appId = '';
+  String merchantId = 'PGTESTPAYUAT115';
+  bool enableLogging = true;
+  String saltKey = 'f94f0bb9-bcfb-4077-adc0-3f8408a17bf7';
+  String saltIndex = '1';
+  String body = '';
+  String callback = '';
+  String checksum = '';
+  String packageName = '';
+  String apiEndPoint = "/pg/v1/pay";
 
+  @override
+  void initState() {
+    super.initState();
+    initPayment();
+    body = getChecksum().toString();
   }
+
+  void initPayment() {
+    PhonePePaymentSdk.init(environmentValue, appId, merchantId, enableLogging)
+        .then((val) {
+      setState(() {
+        result = 'PhonePe SDK Initialized - $val';
+      });
+    }).catchError((error) {
+      handleError(error);
+    });
+  }
+
+  void startTransaction() {
+    PhonePePaymentSdk.startTransaction(body, callback, checksum, packageName)
+        .then((response) {
+      setState(() {
+        if (response != null) {
+          String status = response['status'].toString();
+          String error = response['error'].toString();
+          if (status == 'SUCCESS') {
+            result = "Flow Completed - Status: Success!";
+          } else {
+            result = "Flow Completed - Status: $status and Error: $error";
+          }
+        } else {
+          result = "Flow Incomplete";
+        }
+      });
+    }).catchError((error) {
+      handleError(error);
+    });
+  }
+
+  void handleError(error) {
+    setState(() {
+      result = error.toString();
+    });
+  }
+
+  String getChecksum() {
+    final reqData = {
+      "merchantId": merchantId,
+      "merchantTransactionId": "MT7850590068188104",
+      "merchantUserId": "MUID123",
+      "amount": 10000,
+      "callbackUrl": callback,
+      "mobileNumber": "9999999999",
+      "paymentInstrument": {"type": "PAY_PAGE"}
+    };
+    String base64body = base64.encode(utf8.encode(json.encode(reqData)));
+    checksum =
+        '${sha256.convert(utf8.encode(base64body + apiEndPoint + saltKey)).toString()}###$saltIndex';
+
+    return base64body;
+  }
+
+  void _pay() {
+    InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: (CardDetails) {},
+        onCardEntryCancel: () {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +121,8 @@ class _DonationPageState extends State<DonationPage> {
               ),
               TextField(
                 controller: locationController,
-                decoration: const InputDecoration(labelText: 'Enter your location'),
+                decoration:
+                    const InputDecoration(labelText: 'Enter your location'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -84,9 +159,19 @@ class _DonationPageState extends State<DonationPage> {
               FloatingActionButton(
                 onPressed: _pay,
                 tooltip: 'Donation',
-                child: const Icon(Icons.payment),),
+                child: const Icon(Icons.payment),
+              ),
               const SizedBox(height: 20),
-              
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {
+                    startTransaction();
+                  },
+                  child: Text("PhonePe"),
+                ),
+              ),
+              Text('$result'),
+              const SizedBox(height: 20),
               if (imageBytes != null)
                 Image.memory(imageBytes!)
               else
