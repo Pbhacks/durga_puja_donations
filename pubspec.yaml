@@ -22,7 +22,6 @@ dependencies:
   # Add other dependencies if needed
   fluttertoast: ^8.0.9
   flutter_animate: ^4.5.0
-  square_in_app_payments: ^1.7.1
     
   google_fonts: ^6.2.1
   carousel_slider: ^5.0.0

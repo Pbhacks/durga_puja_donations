@@ -6,8 +6,6 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
-
-import 'package:square_in_app_payments/in_app_payments.dart';
 import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 
 class DonationPage extends StatefulWidget {
@@ -20,6 +18,7 @@ class DonationPage extends StatefulWidget {
 class _DonationPageState extends State<DonationPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
+  final TextEditingController customAmountController = TextEditingController(); // Add this line
   Uint8List? imageBytes;
 
   String result = '';
@@ -39,7 +38,7 @@ class _DonationPageState extends State<DonationPage> {
   void initState() {
     super.initState();
     initPayment();
-    body = getChecksum().toString();
+    body = getChecksum(11).toString();
   }
 
   void initPayment() {
@@ -53,7 +52,8 @@ class _DonationPageState extends State<DonationPage> {
     });
   }
 
-  void startTransaction() {
+  void startTransaction(int amount) {
+     body = getChecksum(amount).toString();
     PhonePePaymentSdk.startTransaction(body, callback, checksum, packageName)
         .then((response) {
       setState(() {
@@ -80,12 +80,12 @@ class _DonationPageState extends State<DonationPage> {
     });
   }
 
-  String getChecksum() {
+  String getChecksum(int amount) {
     final reqData = {
       "merchantId": merchantId,
       "merchantTransactionId": "MT7850590068188104",
       "merchantUserId": "MUID123",
-      "amount": 10000,
+      "amount": amount * 100,
       "callbackUrl": callback,
       "mobileNumber": "9999999999",
       "paymentInstrument": {"type": "PAY_PAGE"}
@@ -97,11 +97,7 @@ class _DonationPageState extends State<DonationPage> {
     return base64body;
   }
 
-  void _pay() {
-    InAppPayments.startCardEntryFlow(
-        onCardNonceRequestSuccess: (CardDetails) {},
-        onCardEntryCancel: () {});
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -155,23 +151,100 @@ class _DonationPageState extends State<DonationPage> {
                 },
                 child: const Text('Generate Invitation'),
               ),
-              const SizedBox(height: 20),
-              FloatingActionButton(
-                onPressed: _pay,
-                tooltip: 'Donation',
-                child: const Icon(Icons.payment),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                child: ElevatedButton(
-                  onPressed: () {
-                    startTransaction();
-                  },
-                  child: Text("PhonePe"),
+                const SizedBox(height: 20),
+                SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: ElevatedButton(
+                    onPressed: () {
+                      startTransaction(11);
+                    },
+                    child: const Text("Donate 11"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: ElevatedButton(
+                    onPressed: () {
+                      startTransaction(101);
+                    },
+                    child: const Text("Donate 101"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: ElevatedButton(
+                    onPressed: () {
+                      startTransaction(501);
+                    },
+                    child: const Text("Donate 501"),
+                    ),
+                  ),
+                  ],
                 ),
-              ),
-              Text('$result'),
-              const SizedBox(height: 20),
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Center(
+                        child: TextField(
+                          controller: customAmountController,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            labelText: 'Custom',
+                            labelStyle: TextStyle(),
+                            isDense: true,
+                            floatingLabelAlignment: FloatingLabelAlignment.center
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          int customAmount = int.tryParse(customAmountController.text) ?? 0;
+                          if (customAmount > 0) {
+                            startTransaction(customAmount);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Please enter a valid amount."),
+                              ),
+                            );
+                          }
+                        },
+                        child: const Text("Donate"),
+                      ),
+                    ),
+                  ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                '$result',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                ),
+                const SizedBox(height: 20),
               if (imageBytes != null)
                 Image.memory(imageBytes!)
               else

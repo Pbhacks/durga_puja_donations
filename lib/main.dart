@@ -2,14 +2,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:square_in_app_payments/in_app_payments.dart';
 import 'donation_page.dart';
 import 'gallery_page.dart';
 import 'starter_screen.dart';
 
 void main() {
     WidgetsFlutterBinding.ensureInitialized();
-    InAppPayments.setSquareApplicationId('sandbox-sq0idb-QItkuQeiQq23o1NYY6tWeA');
   runApp(const MyApp());
 }
 
