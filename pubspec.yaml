@@ -29,7 +29,8 @@ dependencies:
   animate_do: ^3.3.4
   cached_network_image: ^3.4.1
   animated_text_kit: ^4.2.1
- 
+  phonepe_payment_sdk: ^2.0.3
+  crypto: ^3.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
