@@ -23,7 +23,7 @@ dependencies:
   # Add other dependencies if needed
   fluttertoast: ^8.0.9
   flutter_animate: ^4.5.0
-    
+  
   google_fonts: ^6.2.1
   carousel_slider: ^5.0.0
   animate_do: ^3.3.4
@@ -31,6 +31,7 @@ dependencies:
   animated_text_kit: ^4.2.1
   phonepe_payment_sdk: ^2.0.3
   crypto: ^3.0.5
+  percent_indicator: ^4.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

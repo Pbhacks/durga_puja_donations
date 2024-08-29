@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,8 @@ class DonationPage extends StatefulWidget {
 class _DonationPageState extends State<DonationPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
-  final TextEditingController customAmountController = TextEditingController(); // Add this line
+  final TextEditingController customAmountController =
+      TextEditingController(); // Add this line
   Uint8List? imageBytes;
 
   String result = '';
@@ -45,7 +45,7 @@ class _DonationPageState extends State<DonationPage> {
     PhonePePaymentSdk.init(environmentValue, appId, merchantId, enableLogging)
         .then((val) {
       setState(() {
-        result = 'PhonePe SDK Initialized - $val';
+        //result = 'PhonePe SDK Initialized - $val';
       });
     }).catchError((error) {
       handleError(error);
@@ -53,20 +53,21 @@ class _DonationPageState extends State<DonationPage> {
   }
 
   void startTransaction(int amount) {
-     body = getChecksum(amount).toString();
+    body = getChecksum(amount).toString();
     PhonePePaymentSdk.startTransaction(body, callback, checksum, packageName)
         .then((response) {
       setState(() {
         if (response != null) {
           String status = response['status'].toString();
+          // ignore: unused_local_variable
           String error = response['error'].toString();
           if (status == 'SUCCESS') {
             result = "Flow Completed - Status: Success!";
           } else {
-            result = "Flow Completed - Status: $status and Error: $error";
+            //result = "Flow Completed - Status: $status and Error: $error";
           }
         } else {
-          result = "Flow Incomplete";
+          //result = "Flow Incomplete";
         }
       });
     }).catchError((error) {
@@ -96,8 +97,6 @@ class _DonationPageState extends State<DonationPage> {
 
     return base64body;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -151,50 +150,50 @@ class _DonationPageState extends State<DonationPage> {
                 },
                 child: const Text('Generate Invitation'),
               ),
-                const SizedBox(height: 20),
-                SingleChildScrollView(
+              const SizedBox(height: 20),
+              SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: ElevatedButton(
-                    onPressed: () {
-                      startTransaction(11);
-                    },
-                    child: const Text("Donate 11"),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          startTransaction(11);
+                        },
+                        child: const Text("Donate 11"),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: ElevatedButton(
-                    onPressed: () {
-                      startTransaction(101);
-                    },
-                    child: const Text("Donate 101"),
+                    const SizedBox(width: 10),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          startTransaction(101);
+                        },
+                        child: const Text("Donate 101"),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: ElevatedButton(
-                    onPressed: () {
-                      startTransaction(501);
-                    },
-                    child: const Text("Donate 501"),
+                    const SizedBox(width: 10),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          startTransaction(501);
+                        },
+                        child: const Text("Donate 501"),
+                      ),
                     ),
-                  ),
                   ],
                 ),
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Column(
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
@@ -203,12 +202,12 @@ class _DonationPageState extends State<DonationPage> {
                         child: TextField(
                           controller: customAmountController,
                           decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            labelText: 'Custom',
-                            labelStyle: TextStyle(),
-                            isDense: true,
-                            floatingLabelAlignment: FloatingLabelAlignment.center
-                          ),
+                              border: InputBorder.none,
+                              labelText: 'Custom',
+                              labelStyle: TextStyle(),
+                              isDense: true,
+                              floatingLabelAlignment:
+                                  FloatingLabelAlignment.center),
                           keyboardType: TextInputType.number,
                         ),
                       ),
@@ -219,7 +218,8 @@ class _DonationPageState extends State<DonationPage> {
                       curve: Curves.easeInOut,
                       child: ElevatedButton(
                         onPressed: () {
-                          int customAmount = int.tryParse(customAmountController.text) ?? 0;
+                          int customAmount =
+                              int.tryParse(customAmountController.text) ?? 0;
                           if (customAmount > 0) {
                             startTransaction(customAmount);
                           } else {
@@ -234,21 +234,21 @@ class _DonationPageState extends State<DonationPage> {
                       ),
                     ),
                   ],
-                  ),
                 ),
-                const SizedBox(height: 10),
-                Text(
+              ),
+              const SizedBox(height: 10),
+              Text(
                 '$result',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
-                ),
-                const SizedBox(height: 20),
+              ),
+              const SizedBox(height: 20),
               if (imageBytes != null)
                 Image.memory(imageBytes!)
               else
-                const Text('No image generated yet.'),
+                const Text(''), //no image generated yet string
             ],
           ),
         ),

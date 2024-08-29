@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:durga_puja_donations/trivia.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
@@ -7,7 +8,7 @@ import 'gallery_page.dart';
 import 'starter_screen.dart';
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -117,13 +118,14 @@ class HomePage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      icon: const Icon(Icons.monetization_on, color: Colors.white),
+                      icon: const Icon(Icons.monetization_on,
+                          color: Colors.white),
                       label: const Text(
                         'Make a Donation',
                         style: TextStyle(fontSize: 18, color: Colors.white),
@@ -132,7 +134,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  DonationPage()),
+                              builder: (context) => DonationPage()),
                         );
                       },
                     ),
@@ -143,8 +145,8 @@ class HomePage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purpleAccent,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -324,7 +326,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
               children: [
                 // Drawer Header
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                   child: const Row(
                     children: [
                       CircleAvatar(
@@ -394,7 +397,19 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  GalleryPage()),
+                                builder: (context) => GalleryPage()),
+                          );
+                        },
+                      ),
+                      _buildDrawerItem(
+                        context,
+                        icon: Icons.quiz,
+                        title: 'Trivia Quiz',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TriviaPage()),
                           );
                         },
                       ),
@@ -453,7 +468,7 @@ class AboutUsPage extends StatelessWidget {
     },
   ];
 
-   AboutUsPage({super.key});
+  AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
