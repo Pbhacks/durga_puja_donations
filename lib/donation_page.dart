@@ -124,24 +124,25 @@ class _DonationPageState extends State<DonationPage> {
                 onPressed: () async {
                   String name = nameController.text;
                   String location = locationController.text;
+                  BuildContext currentContext = context;
                   if (name.isNotEmpty && location.isNotEmpty) {
                     bool success = await _generateImage(name, location);
                     if (success) {
                       setState(() {});
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      ScaffoldMessenger.of(currentContext).showSnackBar(
                         const SnackBar(
                           content: Text("Invitation image generated."),
                         ),
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      ScaffoldMessenger.of(currentContext).showSnackBar(
                         const SnackBar(
                           content: Text("Failed to generate image."),
                         ),
                       );
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    ScaffoldMessenger.of(currentContext).showSnackBar(
                       const SnackBar(
                         content: Text("Please fill in your details."),
                       ),
@@ -161,17 +162,6 @@ class _DonationPageState extends State<DonationPage> {
                       curve: Curves.easeInOut,
                       child: ElevatedButton(
                         onPressed: () {
-                          startTransaction(11);
-                        },
-                        child: const Text("Donate 11"),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      child: ElevatedButton(
-                        onPressed: () {
                           startTransaction(101);
                         },
                         child: const Text("Donate 101"),
@@ -186,6 +176,17 @@ class _DonationPageState extends State<DonationPage> {
                           startTransaction(501);
                         },
                         child: const Text("Donate 501"),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          startTransaction(1001);
+                        },
+                        child: const Text("Donate 1001"),
                       ),
                     ),
                   ],
@@ -238,8 +239,8 @@ class _DonationPageState extends State<DonationPage> {
               ),
               const SizedBox(height: 10),
               Text(
-                '$result',
-                style: TextStyle(
+                result,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

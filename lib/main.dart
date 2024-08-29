@@ -6,7 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
 import 'donation_page.dart';
 import 'gallery_page.dart';
-import 'starter_screen.dart';
+import 'initial_page.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
               ),
         ),
       ),
-      home: const StarterScreen(),
+      home:  InitialPage(title: 'abc',),
     );
   }
 }
