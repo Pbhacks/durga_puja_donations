@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:durga_puja_donations/events.dart';
 import 'package:durga_puja_donations/trivia.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -410,6 +411,18 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const TriviaPage()),
+                          );
+                        },
+                      ),
+                      _buildDrawerItem(
+                        context,
+                        icon: Icons.event,
+                        title: 'Events Page',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EventsPage()),
                           );
                         },
                       ),
