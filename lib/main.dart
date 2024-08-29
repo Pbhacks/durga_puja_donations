@@ -7,10 +7,13 @@ import 'gallery_page.dart';
 import 'starter_screen.dart';
 
 void main() {
-  runApp(MyApp());
+    WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.black,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.transparent,
           elevation: 0,
           centerTitle: true,
@@ -28,29 +31,31 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme.copyWith(
-                displayLarge: TextStyle(
+                displayLarge: const TextStyle(
                   color: Colors.white,
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
-                displayMedium: TextStyle(
+                displayMedium: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
-                bodyLarge: TextStyle(
+                bodyLarge: const TextStyle(
                   color: Colors.white70,
                   fontSize: 16,
                 ),
               ),
         ),
       ),
-      home: StarterScreen(),
+      home: const StarterScreen(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +103,7 @@ class HomePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   FadeInUp(
                     child: Text(
                       'The Durga Puja Association has been celebrating the vibrant and auspicious festival of Durga Puja since 1988. Over the years, we have organized numerous grand events, cultural programs, and community services. Our dedication to preserving and promoting the rich traditions of Durga Puja has earned us many accolades and the love and respect of our community. Join us in our ongoing efforts to celebrate this festival with the spirit and devotion it deserves.',
@@ -106,20 +111,20 @@ class HomePage extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   FadeInUp(
-                    delay: Duration(milliseconds: 200),
+                    delay: const Duration(milliseconds: 200),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      icon: Icon(Icons.monetization_on, color: Colors.white),
-                      label: Text(
+                      icon: const Icon(Icons.monetization_on, color: Colors.white),
+                      label: const Text(
                         'Make a Donation',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
@@ -127,25 +132,25 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DonationPage()),
+                              builder: (context) =>  DonationPage()),
                         );
                       },
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   FadeInUp(
-                    delay: Duration(milliseconds: 400),
+                    delay: const Duration(milliseconds: 400),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purpleAccent,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      icon: Icon(Icons.photo_album, color: Colors.white),
-                      label: Text(
+                      icon: const Icon(Icons.photo_album, color: Colors.white),
+                      label: const Text(
                         'View Gallery',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
@@ -158,9 +163,9 @@ class HomePage extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   FadeInUp(
-                    delay: Duration(milliseconds: 600),
+                    delay: const Duration(milliseconds: 600),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -168,9 +173,9 @@ class HomePage extends StatelessWidget {
                           'Upcoming Events',
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
                             color: Colors.white24,
                             borderRadius: BorderRadius.circular(12),
@@ -182,17 +187,17 @@ class HomePage extends StatelessWidget {
                                 '1. Community Service Day',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Text(
                                 'Join us for a day of community service and make a difference in our neighborhood.',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Text(
                                 '2. Cultural Dance Workshop',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Text(
                                 'Participate in our workshop to learn traditional dance forms and celebrate our culture.',
                                 style: Theme.of(context).textTheme.bodyLarge,
@@ -200,19 +205,19 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         FadeInUp(
-                          delay: Duration(milliseconds: 800),
+                          delay: const Duration(milliseconds: 800),
                           child: Text(
                             'Contact Us',
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         FadeInUp(
-                          delay: Duration(milliseconds: 1000),
+                          delay: const Duration(milliseconds: 1000),
                           child: Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             decoration: BoxDecoration(
                               color: Colors.white24,
                               borderRadius: BorderRadius.circular(12),
@@ -224,12 +229,12 @@ class HomePage extends StatelessWidget {
                                   'Email: contact@durga_puja.com',
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Phone: +1 234 567 890',
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Address: 123 Festival Lane, Puja City, PC 12345',
                                   style: Theme.of(context).textTheme.bodyLarge,
@@ -251,11 +256,13 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildDrawer(BuildContext context) {
-    return AnimatedDrawer();
+    return const AnimatedDrawer();
   }
 }
 
 class AnimatedDrawer extends StatefulWidget {
+  const AnimatedDrawer({super.key});
+
   @override
   _AnimatedDrawerState createState() => _AnimatedDrawerState();
 }
@@ -273,7 +280,7 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       vsync: this,
     )..repeat(reverse: true);
 
@@ -317,8 +324,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
               children: [
                 // Drawer Header
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                  child: Row(
+                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                  child: const Row(
                     children: [
                       CircleAvatar(
                         radius: 35,
@@ -387,7 +394,7 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => GalleryPage()),
+                                builder: (context) =>  GalleryPage()),
                           );
                         },
                       ),
@@ -395,8 +402,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                   ),
                 ),
                 // Footer
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     '© 2023 Durga Puja Association',
                     style: TextStyle(color: Colors.white54, fontSize: 14),
@@ -419,7 +426,7 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
       leading: Icon(icon, color: Colors.purpleAccent, size: 28),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 18),
+        style: const TextStyle(color: Colors.white, fontSize: 18),
       ),
       onTap: onTap,
     );
@@ -446,14 +453,16 @@ class AboutUsPage extends StatelessWidget {
     },
   ];
 
+   AboutUsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About Us'),
+        title: const Text('About Us'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -461,40 +470,40 @@ class AboutUsPage extends StatelessWidget {
               'Our Features and Events',
               style: Theme.of(context).textTheme.displayMedium,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'The Durga Puja Association takes pride in its rich heritage and the numerous events it organizes each year. Our key features include:',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            SizedBox(height: 10),
-            ListTile(
+            const SizedBox(height: 10),
+            const ListTile(
               leading: Icon(Icons.star, color: Colors.purpleAccent),
               title: Text('Grand Durga Puja Celebrations'),
               subtitle: Text(
                   'Join us for the most vibrant and grand Durga Puja celebrations.'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.star, color: Colors.purpleAccent),
               title: Text('Cultural Programs'),
               subtitle: Text(
                   'Experience traditional dance, music, and art from various cultures.'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.star, color: Colors.purpleAccent),
               title: Text('Community Services'),
               subtitle: Text(
                   'We actively participate in charitable activities and community services.'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Recent Events',
               style: Theme.of(context).textTheme.displayMedium,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               children: events.map((event) {
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

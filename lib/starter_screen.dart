@@ -3,6 +3,8 @@ import 'dart:ui'; // Import for ImageFilter
 import 'main.dart'; // Import your main app file
 
 class StarterScreen extends StatefulWidget {
+  const StarterScreen({super.key});
+
   @override
   _StarterScreenState createState() => _StarterScreenState();
 }
@@ -19,7 +21,7 @@ class _StarterScreenState extends State<StarterScreen>
   late Animation<Color?> _page3Color1;
   late Animation<Color?> _page3Color2;
 
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
@@ -86,7 +88,7 @@ class _StarterScreenState extends State<StarterScreen>
           if (nextPage < 3) {
             _pageController.animateToPage(
               nextPage,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );
           }
@@ -97,7 +99,7 @@ class _StarterScreenState extends State<StarterScreen>
           // Swiped Up
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         }
       },
@@ -147,14 +149,14 @@ class _StarterScreenState extends State<StarterScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
                       size: 36,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      'Swipe left to next screen',
+                      'Swipe left to next screen 2',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -163,7 +165,7 @@ class _StarterScreenState extends State<StarterScreen>
                           Shadow(
                             blurRadius: 10.0,
                             color: Colors.black.withOpacity(0.6),
-                            offset: Offset(0, 2),
+                            offset: const Offset(0, 2),
                           ),
                         ],
                       ),
@@ -180,7 +182,7 @@ class _StarterScreenState extends State<StarterScreen>
               right: 0,
               child: Center(
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.keyboard_arrow_up,
                     color: Colors.white,
                     size: 36,
@@ -188,7 +190,7 @@ class _StarterScreenState extends State<StarterScreen>
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   },
                 ),
@@ -231,7 +233,7 @@ class _StarterScreenState extends State<StarterScreen>
                         Shadow(
                           blurRadius: 10.0,
                           color: Colors.black.withOpacity(0.6),
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -257,7 +259,7 @@ class _StarterScreenState extends State<StarterScreen>
                     Shadow(
                       blurRadius: 10.0,
                       color: Colors.black.withOpacity(1.0),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -280,7 +282,7 @@ class _StarterScreenState extends State<StarterScreen>
                     Shadow(
                       blurRadius: 10.0,
                       color: Colors.black.withOpacity(0.6),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
