@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:durga_puja_donations/events.dart';
+import 'package:durga_puja_donations/playlist_page.dart';
 import 'package:durga_puja_donations/trivia.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +10,9 @@ import 'donation_page.dart';
 import 'gallery_page.dart';
 import 'initial_page.dart';
 
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -52,10 +53,14 @@ class MyApp extends StatelessWidget {
               ),
         ),
       ),
-      home:  InitialPage(title: 'abc',),
+      home: InitialPage(
+        title: 'abc',
+      ),
     );
   }
 }
+
+// Continue with the rest of your code...
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -73,7 +78,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      
       drawer: _buildDrawer(context),
       body: Stack(
         children: [
@@ -250,19 +254,15 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 30),
-                  Text(
-                    'Durga Puja Information',
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: 600,
-                    
-                    child: DurgaPujaApp()),
+                        Text(
+                          'Durga Puja Information',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(height: 600, child: DurgaPujaApp()),
                       ],
                     ),
                   ),
-                 
                 ],
               ),
             ),
@@ -378,6 +378,18 @@ class _AnimatedDrawerState extends State<AnimatedDrawer>
                         title: 'Home',
                         onTap: () {
                           Navigator.pop(context);
+                        },
+                      ),
+                      _buildDrawerItem(
+                        context,
+                        icon: Icons.video_collection,
+                        title: 'Playlists',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PlaylistsPage()),
+                          );
                         },
                       ),
                       _buildDrawerItem(
@@ -578,7 +590,6 @@ class AboutUsPage extends StatelessWidget {
           ],
         ),
       ),
-  
     );
   }
 }

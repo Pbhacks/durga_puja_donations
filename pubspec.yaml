@@ -32,6 +32,9 @@ dependencies:
   phonepe_payment_sdk: ^2.0.3
   crypto: ^3.0.5
   percent_indicator: ^4.2.3
+  youtube_player_flutter: ^9.0.3
+  
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -83,5 +86,6 @@ flutter:
     - assets/images/bengali_culture.png
     - assets/images/conclusion.png
     - assets/images/durga_mata_image.jpg
+    
 dependency_overrides:
   http: ^0.13.0

@@ -20,21 +20,23 @@ class _InitialPageState extends State<InitialPage> {
         children: <Widget>[
           ContentCard(
             color: 'Red',
-            altColor: Color(0xFF4259B2),
+            altColor: const Color(0xFF4259B2),
             title: "Invoke Durga Mata's Blessings",
-            subtitle: 'Start your day with a serene prayer to Durga Mata,the Divine Mother, seeking her blessings for a peaceful and prosperous day.',
+            subtitle:
+                'Start your day with a serene prayer to Durga Mata,the Divine Mother, seeking her blessings for a peaceful and prosperous day.',
           ),
           ContentCard(
-            color: 'Yellow',
-            altColor: Color(0xFF904E93),
-            title: "Find Solace in Durga Mata's Presence",
-            subtitle: 'Offer your prayers and find solace in the divine presence of Durga Mata. Practice meditation and breathing exercises to calm your mind and soul.'
-          ),
+              color: 'Yellow',
+              altColor: const Color(0xFF904E93),
+              title: "Find Solace in Durga Mata's Presence",
+              subtitle:
+                  'Offer your prayers and find solace in the divine presence of Durga Mata. Practice meditation and breathing exercises to calm your mind and soul.'),
           ContentCard(
             color: 'Blue',
-            altColor: Color(0xFFFFB138),
+            altColor: const Color(0xFFFFB138),
             title: "Rest Under Durga Mata's Watch",
-            subtitle: 'Conclude your day with a prayer to Durga Mata, seeking her protection and ensuring a peaceful night\'s sleep',
+            subtitle:
+                'Conclude your day with a prayer to Durga Mata, seeking her protection and ensuring a peaceful night\'s sleep',
           ),
         ],
       ),

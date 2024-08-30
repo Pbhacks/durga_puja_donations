@@ -7,6 +7,7 @@ class GalleryPage extends StatelessWidget {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaK06X7aB6xTYuUvL0jvByqTqQ5N59LK6SIQ&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdGsWHbzkaiWxx4sYDYh19tHxV957TijNR0g&s',
     'https://media.gettyimages.com/id/458583265/photo/goddess-during-durga-puja-celebrations.jpg?s=170667a&w=gi&k=20&c=gsFTh47LFP1486n9q4n8EXuQ3coo4NNE-c2_GSwo1EU=',
+    'https://i.pinimg.com/736x/5f/5f/f5/5f5ff50d5e8303e77fa182c6599cf2cd.jpg',
   ];
 
   GalleryPage({super.key});
@@ -93,7 +94,8 @@ class ImagePreviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: const Text('Image Preview', style: TextStyle(color: Colors.white)),
+        title:
+            const Text('Image Preview', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: Center(

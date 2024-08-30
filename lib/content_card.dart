@@ -9,13 +9,20 @@ class ContentCard extends StatefulWidget {
   final String title;
   final String subtitle;
 
-  ContentCard({required this.color, this.title = "", required this.subtitle, required this.altColor}) : super();
+  const ContentCard({
+    super.key,
+    required this.color,
+    this.title = "",
+    required this.subtitle,
+    required this.altColor,
+  });
 
   @override
   _ContentCardState createState() => _ContentCardState();
 }
 
-class _ContentCardState extends State<ContentCard> {
+class _ContentCardState extends State<ContentCard>
+    with SingleTickerProviderStateMixin {
   late Ticker _ticker;
 
   @override
@@ -48,10 +55,12 @@ class _ContentCardState extends State<ContentCard> {
           fit: StackFit.expand,
           children: <Widget>[
             Transform.translate(
-              offset: Offset(-(scaleX - 1) / 2 * width, -(scaleY - 1) / 2 * height + offsetY),
+              offset: Offset(-(scaleX - 1) / 2 * width,
+                  -(scaleY - 1) / 2 * height + offsetY),
               child: Transform(
                 transform: Matrix4.diagonal3Values(scaleX, scaleY, 1),
-                child: Image.asset('assets/images/Bg-${widget.color}.png', fit: BoxFit.cover),
+                child: Image.asset('assets/images/Bg-${widget.color}.png',
+                    fit: BoxFit.cover),
               ),
             ),
             Container(
@@ -60,7 +69,7 @@ class _ContentCardState extends State<ContentCard> {
                 padding: const EdgeInsets.only(top: 75.0, bottom: 25.0),
                 child: Column(
                   children: <Widget>[
-                    //Top Image
+                    // Top Image
                     Expanded(
                       flex: 3,
                       child: Padding(
@@ -72,10 +81,14 @@ class _ContentCardState extends State<ContentCard> {
                       ),
                     ),
 
-                    //Slider circles
-                    Container(height: 14, child: Image.asset('assets/images/Slider-${widget.color}.png')),
+                    // Slider circles
+                    SizedBox(
+                      height: 14,
+                      child: Image.asset(
+                          'assets/images/Slider-${widget.color}.png'),
+                    ),
 
-                    //Bottom content
+                    // Bottom content
                     Expanded(
                       flex: 2,
                       child: Padding(
@@ -98,41 +111,77 @@ class _ContentCardState extends State<ContentCard> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text(widget.title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                height: 1.2, fontSize: 30.0, fontFamily: 'DMSerifDisplay', color: Colors.white)),
-        Text(widget.subtitle,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w300,
-                fontFamily: 'OpenSans',
-                color: Colors.white)),
+        Text(
+          widget.title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            height: 1.2,
+            fontSize: 30.0,
+            fontFamily: 'DMSerifDisplay',
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          widget.subtitle,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w300,
+            fontFamily: 'OpenSans',
+            color: Colors.white,
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 36.0),
-          child: MaterialButton(
-            elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-            color: widget.altColor,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Text('Get Started',
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            child: MaterialButton(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)),
+              color: widget.altColor,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Text(
+                  'Get Started',
                   style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: .8,
-                      fontFamily: 'OpenSans',
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white)),
+                    fontSize: 16,
+                    letterSpacing: .8,
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const HomePage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      const begin =
+                          Offset(0.0, 1.0); // Page transition start point
+                      const end = Offset.zero; // Page transition end point
+                      const curve = Curves.easeInOut;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
             ),
-            onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
           ),
-        )
+        ),
       ],
     );
   }
