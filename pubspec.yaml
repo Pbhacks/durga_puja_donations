@@ -74,5 +74,14 @@ flutter:
     - assets/images/Illustration-Blue.png
     - assets/images/Slider-Blue.png
     - assets/images/Bg-Blue.png
+    - assets/images/history_image.png
+    - assets/images/durga_maa_significance.png
+    - assets/images/preparation_celebration.png
+    - assets/images/rituals_customs.png
+    - assets/images/pandals_idols.png
+    - assets/images/procession_immersion.png
+    - assets/images/bengali_culture.png
+    - assets/images/conclusion.png
+    - assets/images/durga_mata_image.jpg
 dependency_overrides:
   http: ^0.13.0

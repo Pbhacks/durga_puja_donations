@@ -4,6 +4,7 @@ import 'package:durga_puja_donations/trivia.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import 'DurgaPujaApp.dart';
 import 'donation_page.dart';
 import 'gallery_page.dart';
 import 'initial_page.dart';
@@ -72,6 +73,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      
       drawer: _buildDrawer(context),
       body: Stack(
         children: [
@@ -247,9 +249,20 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 30),
+                  Text(
+                    'Durga Puja Information',
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 600,
+                    
+                    child: DurgaPujaApp()),
                       ],
                     ),
                   ),
+                 
                 ],
               ),
             ),
@@ -565,6 +578,7 @@ class AboutUsPage extends StatelessWidget {
           ],
         ),
       ),
+  
     );
   }
 }
