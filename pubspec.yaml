@@ -53,5 +53,35 @@ flutter:
     - assets/event3.jpg
     - assets/background.jpg
     - assets/logo.png
+    - assets/images/Sun-Yellow.png
+    - assets/images/Sun-Red.png
+    - assets/images/Moon-Crescent.png
+    - assets/images/Bg-Red.png
+    - assets/images/Illustration-Red.png
+    - assets/images/Slider-Red.png
+    - assets/images/Bg-Yellow.png
+    - assets/images/Illustration-Yellow.png
+    - assets/images/Slider-Yellow.png
+    - assets/images/Sun-Yellow.png
+    - assets/images/Sun-Red.png
+    - assets/images/Moon-Crescent.png
+    - assets/images/Bg-Red.png
+    - assets/images/Illustration-Red.png
+    - assets/images/Slider-Red.png
+    - assets/images/Bg-Yellow.png
+    - assets/images/Illustration-Yellow.png
+    - assets/images/Slider-Yellow.png
+    - assets/images/Illustration-Blue.png
+    - assets/images/Slider-Blue.png
+    - assets/images/Bg-Blue.png
+    - assets/images/history_image.png
+    - assets/images/durga_maa_significance.png
+    - assets/images/preparation_celebration.png
+    - assets/images/rituals_customs.png
+    - assets/images/pandals_idols.png
+    - assets/images/procession_immersion.png
+    - assets/images/bengali_culture.png
+    - assets/images/conclusion.png
+    - assets/images/durga_mata_image.jpg
 dependency_overrides:
   http: ^0.13.0
