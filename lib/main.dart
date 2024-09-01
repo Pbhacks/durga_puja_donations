@@ -9,6 +9,7 @@ import 'DurgaPujaApp.dart';
 import 'donation_page.dart';
 import 'gallery_page.dart';
 import 'initial_page.dart';
+import 'splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,13 +54,49 @@ class MyApp extends StatelessWidget {
               ),
         ),
       ),
-      home: InitialPage(
-        title: 'abc',
-      ),
+      home: BallBounceIndex(),
     );
   }
 }
 
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _navigateToInitialPage();
+  }
+
+  _navigateToInitialPage() async {
+    // Delay for 3 seconds (or however long you want the splash screen to display)
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    // Navigate to the initial page
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => InitialPage(
+                title: 'abc',
+              )),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Splash Screen',
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
+      ),
+    );
+  }
+}
 // Continue with the rest of your code...
 
 class HomePage extends StatelessWidget {

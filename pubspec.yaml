@@ -86,6 +86,7 @@ flutter:
     - assets/images/bengali_culture.png
     - assets/images/conclusion.png
     - assets/images/durga_mata_image.jpg
+    - assets/images/your_logo.png
     
 dependency_overrides:
   http: ^0.13.0
